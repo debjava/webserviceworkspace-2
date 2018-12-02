@@ -1,0 +1,37 @@
+<project name="StockService" basedir="." default="create.war">
+
+    <property name="build.dir"                 value="build" />
+    <property name="lib.dir"                   value="lib" />
+    <property name="dist.dir"                  value="${basedir}/dist"/>
+    <property name="gen.dir"                   value="${basedir}/gensrc" />
+	<property name="web.dir"                   value="${basedir}/web"/>
+    <property name="webinf.dir"                value="${web.dir}/WEB-INF"/>
+    <property name="services.dir"              value="${webinf.dir}/services"/>
+    <property name="war.file.name"             value="${ant.project.name}.war"/>
+	<property name="aar.file.name"             value="${ant.project.name}.aar"/>
+
+   <target name="create.war">
+       <ant antfile="${gen.dir}/build.xml" dir="${gen.dir}" inheritrefs="false" />
+       <delete dir="${webinf.dir}/lib"/>
+       <mkdir dir="${webinf.dir}/lib"/>
+       <copy toDir="${webinf.dir}/lib" flatten="true">
+           <fileset dir="${lib.dir}">
+               <include name="**/*.jar"/>
+           </fileset>
+       </copy>
+       <copy toDir="${services.dir}" flatten="true">
+           <fileset dir="${gen.dir}/${build.dir}">
+               <include name="**/*.aar"/>
+           </fileset>
+       </copy>
+       <echo file="${services.dir}/services.list" message="${aar.file.name}"/>
+       <copy toDir="${build.dir}/${war.file.name}">
+           <fileset dir="${web.dir}"/>
+       </copy>
+       <jar destfile="${dist.dir}/${war.file.name}">
+           <fileset dir="${web.dir}"/>
+       </jar>
+   </target>
+
+
+</project>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soap:Header>
+		<myHeader xmlns="http://soapheader.ibm.com">
+			<username>aaaaaa</username>
+			<password>bbbbbb</password>
+		</myHeader>
+	</soap:Header>
+	<soap:Body>
+		<getLastSellPrice xmlns="http://soapheader.ibm.com">
+			<ticker>123</ticker>
+		</getLastSellPrice>
+		<myHeader xmlns="http://soapheader.ibm.com">
+			<username />
+			<password />
+		</myHeader>
+	</soap:Body>
+</soap:Envelope>

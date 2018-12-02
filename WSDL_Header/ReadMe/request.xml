@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soap:Header>
+		<quote_timestamp xmlns="http://soapheader.ibm.com"
+			soap:actor="qa">aaa</quote_timestamp>
+	</soap:Header>
+	<soap:Body>
+		<getLastSellPrice xmlns="http://soapheader.ibm.com">
+			<ticker>wsdf</ticker>
+		</getLastSellPrice>
+	</soap:Body>
+</soap:Envelope>

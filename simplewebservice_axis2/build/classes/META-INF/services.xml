@@ -1,0 +1,16 @@
+<service name="simplewebservice" scope="application"
+	targetNamespace="http://service.simplewebservice/">
+	<description>Simple Webservice using axis2 , developed by - Debadatta
+		Mishra</description>
+	<messageReceivers>
+            <messageReceiver
+                    mep="http://www.w3.org/2004/08/wsdl/in-only"
+                    class="com.ddlab.webservice.axis2.SampleInOnlyMessageReceiver"/>
+            <messageReceiver
+                    mep="http://www.w3.org/2004/08/wsdl/in-out"
+                    class="com.ddlab.webservice.axis2.SampleInOutMessageReceiver"/>
+        </messageReceivers>
+	<schema schemaNamespace="http://service.simplewebservice/xsd" />
+	<parameter name="ServiceClass">com.ddlab.webservice.axis2.SimpleWebService
+	</parameter>
+</service>

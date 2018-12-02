@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soapheader.ibm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://soapheader.ibm.com" xmlns:impl="http://soapheader.ibm.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://soapheader.ibm.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getLastSellPrice"> 
+    <complexType> 
+     <sequence>
+      <element name="ticker" nillable="true" type="xsd:string" />
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLastSellPriceResponse">
+    <complexType>
+     <sequence>
+      <element name="getLastSellPriceReturn" type="xsd:float" />
+     </sequence>
+    </complexType>
+   </element>
+   <element name="myHeader"> 
+    <complexType> 
+     <sequence>
+       <element name="username" type="xsd:string" />
+	   <element name="password" type="xsd:string" />
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  </wsdl:types>
+  <wsdl:message name="getLastSellPriceRequest">
+    <wsdl:part name="parameters" element="intf:getLastSellPrice"/>
+    <wsdl:part name="request_header" element="intf:myHeader"/>
+  </wsdl:message>
+  <wsdl:message name="getLastSellPriceResponse">
+    <wsdl:part name="parameters" element="intf:getLastSellPriceResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="StockService">
+    <wsdl:operation name="getLastSellPrice">
+      <wsdl:input name="getLastSellPriceRequest" message="intf:getLastSellPriceRequest"/>
+      <wsdl:output name="getLastSellPriceResponse" message="intf:getLastSellPriceResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StockServiceSoapBinding" type="intf:StockService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getLastSellPrice">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getLastSellPriceRequest">
+        <wsdlsoap:header message="intf:getLastSellPriceRequest" part="request_header" use="literal"/>
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:input>
+      <wsdl:output name="getLastSellPriceResponse">
+        <wsdlsoap:body use="literal" parts="parameters"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StockServiceService">
+    <wsdl:port name="StockService" binding="intf:StockServiceSoapBinding">
+      <wsdlsoap:address location="http://localhost:8080/StockService/services/StockService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

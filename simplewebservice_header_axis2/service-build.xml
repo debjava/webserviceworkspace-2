@@ -1,0 +1,49 @@
+<project name="SimpleWebService" basedir="." default="gen.service">
+
+	<property name="wsdl.file.name"            value="SimpleWebService" />   
+	<property name="wsdl.file"                 value="${basedir}/wsdls/${wsdl.file.name}" />
+	<property name="wsdl.uri"                  value="${wsdl.file}.wsdl" />
+	<property name="gen.dir"                   value="${basedir}/gensrc" />
+	<property name="build.dir"                 value="build" />
+	<property name="lib.dir"                   value="lib" />
+	<property name="dist.dir"                  value="${basedir}/dist"/>
+	<property name="web.dir"                   value="${basedir}/web"/>
+	<property name="webinf.dir"                value="${web.dir}/WEB-INF"/>
+	<property name="services.dir"              value="${webinf.dir}/services"/>
+	<property name="war.file.name"             value="${ant.project.name}.war"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+    <taskdef name="codegen" classname="org.apache.axis2.tool.ant.AntCodegenTask" classpathref="classpath"/>
+
+	<target name="clean">
+		<echo message="deleting the old directories and creation of new directories" />
+		<delete dir="${build.dir}" />
+		<delete dir="${gen.dir}" />
+		<delete dir="${webinf.dir}/lib"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+	
+	<target name="init" depends="clean">
+        <echo message="deleting the old directories and creation of new directories" />
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.dir}/${war.file.name}"/>
+        <mkdir dir="${gen.dir}" />
+        <mkdir dir="${webinf.dir}/lib"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+	
+	<target name="gen.service" depends="init">
+	    <codegen
+	     wsdlfilename="${wsdl.uri}"
+	     output="${gen.dir}"
+	     serverside="true"
+	     generateservicexml="true" />
+	</target>
+	
+
+</project>

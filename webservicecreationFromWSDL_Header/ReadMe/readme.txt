@@ -1,0 +1,1 @@
+http://localhost:8080/StockService/services/StockServiceService?wsdl

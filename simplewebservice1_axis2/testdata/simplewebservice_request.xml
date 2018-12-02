@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+		<ns1:getName xmlns:ns1="http://service.simplewebservice/xsd">
+			<ns1>Debadatta Mishra(PIKU)</ns1>
+		</ns1:getName>
+	</soapenv:Body>
+</soapenv:Envelope>
